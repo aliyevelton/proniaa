@@ -4,7 +4,6 @@ using ProniaAgain.Areas.Admin.Helpers;
 using ProniaAgain.Areas.Admin.ViewModels;
 using ProniaAgain.Contexts;
 using ProniaAgain.Models;
-using System.Drawing;
 
 namespace ProniaP336.Areas.Admin.Controllers;
 
@@ -69,6 +68,29 @@ public class SliderController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> Delete(int id)
+    {
+        var slide = await _context.Sliders.FirstOrDefaultAsync(s => s.Id == id);
+        if (slide == null)
+        {
+            return NotFound();
+        }
+        return View(slide);
+    }
+    [HttpPost]
+    [ActionName(nameof(Delete))]
+    public async Task<IActionResult> DeleteSlide(int id)
+    {
+        var slide = await _context.Sliders.FirstOrDefaultAsync(s => s.Id == id);
+        if (slide == null)
+        {
+            return NotFound();
+        }
 
+        _context.Sliders.Remove(slide);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
 }
 
