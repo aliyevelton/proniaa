@@ -1,0 +1,54 @@
+﻿@using ProniaAgain
+@model List<Shipping>
+
+@{
+    ViewData["Title"] = "Shippings";
+}
+
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Basic Table</h4>
+                    <p class="card-description">
+                        Add class <code>.table</code>
+                    </p>
+                    @if (Model.Count < 3)
+                    {
+                        <a class="btn btn-primary" asp-action="Create">Create</a>
+                    }
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var shipping in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="~/assets/images/website-images/@shipping.Image" />
+                                        </td>
+                                        <td>@shipping.Title</td>
+                                        <td>@shipping.Description</td>
+                                        <td>
+                                            <a class="btn btn-info" asp-action="Detail">Detail</a>
+                                            <a class="btn btn-warning" asp-action="Update">Update</a>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
