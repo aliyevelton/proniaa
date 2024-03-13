@@ -92,5 +92,15 @@ public class SliderController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    public async Task<IActionResult> Detail(int id)
+    {
+        var slide = await _context.Sliders.FirstOrDefaultAsync(s => s.Id == id);
+        if (slide == null)
+        {
+            return NotFound();
+        }
+        return View(slide);
+    }
 }
 
